@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jayant — The One Being</title>
+<meta name="description" content="Exploring the universe as a single conscious being. Philosophy, consciousness, thermodynamics, and the bridge between science and enlightenment.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=JetBrains+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+
+:root{
+  --void:#050510;
+  --void-soft:#0a0a1a;
+  --surface:#0e0e20;
+  --surface-raised:#141430;
+  --border:rgba(240,238,246,0.06);
+  --border-hover:rgba(212,168,83,0.2);
+  --text:#f0eef6;
+  --text-secondary:rgba(240,238,246,0.55);
+  --text-muted:rgba(240,238,246,0.3);
+  --gold:#d4a853;
+  --gold-dim:rgba(212,168,83,0.15);
+  --gold-glow:rgba(212,168,83,0.4);
+  --anger:#ff2d2d;
+  --joy:#ffd700;
+  --grief:#4169e1;
+  --fear:#8b00ff;
+  --love:#ff69b4;
+  --peace:#00ff88;
+}
+
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{
+  background:var(--void);color:var(--text);
+  font-family:'DM Sans',sans-serif;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ===== COSMIC CANVAS ===== */
+#cosmos{position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:0}
+#particleOverlay{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1}
+.cursor-glow{
+  position:fixed;width:400px;height:400px;border-radius:50%;
+  background:radial-gradient(circle,rgba(212,168,83,0.04),transparent 70%);
+  pointer-events:none;z-index:0;transform:translate(-50%,-50%);
+}
+
+/* ===== NAV ===== */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:0 clamp(1.5rem,4vw,4rem);
+  height:70px;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(5,5,16,0.6);
+  backdrop-filter:blur(20px) saturate(1.2);
+  -webkit-backdrop-filter:blur(20px) saturate(1.2);
+  border-bottom:1px solid var(--border);
+  transition:all 0.4s;
+}
+nav.scrolled{background:rgba(5,5,16,0.9);box-shadow:0 4px 30px rgba(0,0,0,0.4)}
+.nav-brand{
+  font-family:'Syne',sans-serif;font-weight:800;font-size:1.2rem;
+  letter-spacing:-0.02em;
+  background:linear-gradient(135deg,var(--text),var(--gold));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  text-decoration:none;
+}
+.nav-brand span{
+  font-weight:400;font-size:0.7rem;letter-spacing:0.15em;
+  display:block;text-transform:uppercase;
+  -webkit-text-fill-color:var(--text-muted);
+  margin-top:-2px;
+}
+.nav-links{display:flex;gap:2rem;align-items:center}
+.nav-links a{
+  font-family:'JetBrains Mono',monospace;font-size:0.65rem;
+  letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--text-secondary);text-decoration:none;
+  transition:color 0.3s;position:relative;
+}
+.nav-links a:hover{color:var(--gold)}
+.nav-links a::after{
+  content:'';position:absolute;bottom:-4px;left:0;right:0;
+  height:1px;background:var(--gold);transform:scaleX(0);
+  transition:transform 0.3s cubic-bezier(0.23,1,0.32,1);
+}
+.nav-links a:hover::after{transform:scaleX(1)}
+.nav-cta{
+  font-family:'JetBrains Mono',monospace;font-size:0.6rem;
+  letter-spacing:0.1em;text-transform:uppercase;
+  padding:0.5rem 1.2rem;
+  border:1px solid var(--gold-dim);color:var(--gold);
+  background:transparent;border-radius:4px;cursor:pointer;
+  transition:all 0.3s;text-decoration:none;
+}
+.nav-cta:hover{background:var(--gold-dim);border-color:var(--gold)}
+.nav-menu-btn{display:none;background:none;border:none;color:var(--text);font-size:1.5rem;cursor:pointer}
+
+/* ===== HERO ===== */
+#hero{
+  position:relative;z-index:2;
+  min-height:100vh;padding-top:70px;
+  display:flex;align-items:center;justify-content:center;
+  flex-direction:column;
+}
+.hero-content{text-align:center;max-width:900px;padding:2rem}
+.hero-eyebrow{
+  font-family:'JetBrains Mono',monospace;font-size:0.6rem;
+  letter-spacing:0.35em;text-transform:uppercase;
+  color:var(--gold);opacity:0.7;margin-bottom:1.5rem;
+  opacity:0;transform:translateY(20px);
+  animation:heroReveal 1s 0.3s cubic-bezier(0.23,1,0.32,1) forwards;
+}
+.hero-title{
+  font-family:'Syne',sans-serif;font-size:clamp(3rem,9vw,7.5rem);
+  font-weight:800;line-height:0.92;letter-spacing:-0.04em;
+  background:linear-gradient(135deg,var(--text) 0%,var(--gold) 40%,var(--text) 80%);
+  background-size:200% 200%;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  animation:shimmer 8s ease-in-out infinite, heroReveal 1.2s 0.5s cubic-bezier(0.23,1,0.32,1) forwards;
+  opacity:0;transform:translateY(40px);
+}
+@keyframes shimmer{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+@keyframes heroReveal{to{opacity:1;transform:translateY(0)}}
+
+.hero-subtitle{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.1rem,2.5vw,1.7rem);font-weight:300;font-style:italic;
+  color:var(--text-secondary);max-width:550px;margin:2rem auto 0;
+  line-height:1.6;
+  opacity:0;transform:translateY(30px);
+  animation:heroReveal 1.2s 0.8s cubic-bezier(0.23,1,0.32,1) forwards;
+}
+.hero-meta{
+  display:flex;gap:3rem;justify-content:center;margin-top:3rem;
+  opacity:0;animation:heroReveal 1s 1.2s cubic-bezier(0.23,1,0.32,1) forwards;
+}
+.hero-meta-item{text-align:center}
+.hero-meta-item .num{
+  font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:700;
+  color:var(--gold);display:block;
+}
+.hero-meta-item .lbl{
+  font-family:'JetBrains Mono',monospace;font-size:0.5rem;
+  letter-spacing:0.2em;text-transform:uppercase;color:var(--text-muted);
+  margin-top:0.2rem;display:block;
+}
+.scroll-hint{
+  position:absolute;bottom:2.5rem;
+  display:flex;flex-direction:column;align-items:center;gap:0.5rem;
+  opacity:0;animation:heroReveal 1s 2s forwards;
+}
+.scroll-hint span{
+  font-family:'JetBrains Mono',monospace;font-size:0.55rem;
+  letter-spacing:0.3em;text-transform:uppercase;color:var(--text-muted);
+}
+.scroll-line{
+  width:1px;height:35px;
+  background:linear-gradient(to bottom,var(--gold-glow),transparent);
+  animation:pulseLine 2s ease-in-out infinite;
+}
+@keyframes pulseLine{0%,100%{opacity:0.6;transform:scaleY(1)}50%{opacity:0.2;transform:scaleY(0.5)}}
+
+/* ===== SECTION LAYOUT ===== */
+.content-layer{position:relative;z-index:2}
+.section-pad{padding:clamp(4rem,10vw,8rem) clamp(1.5rem,4vw,4rem)}
+.container{max-width:1200px;margin:0 auto}
+.narrow{max-width:750px;margin:0 auto}
+
+/* ===== PHILOSOPHY INTRO ===== */
+.philosophy-intro{
+  display:grid;grid-template-columns:1fr 1fr;gap:4rem;
+  align-items:center;
+}
+.philosophy-intro .col-text{}
+.philosophy-intro .col-visual{
+  display:flex;align-items:center;justify-content:center;
+}
+.section-label{
+  font-family:'JetBrains Mono',monospace;font-size:0.6rem;
+  letter-spacing:0.3em;text-transform:uppercase;
+  color:var(--gold);opacity:0.6;margin-bottom:1rem;
+  display:flex;align-items:center;gap:0.8rem;
+}
+.section-label::before{content:'';width:20px;height:1px;background:var(--gold);opacity:0.4}
+.section-heading{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2rem,4vw,3.2rem);font-weight:400;
+  line-height:1.2;margin-bottom:1.5rem;
+}
+.section-heading em{font-style:italic;color:var(--gold)}
+.body-text{
+  font-size:1rem;line-height:1.85;color:var(--text-secondary);
+  font-weight:300;
+}
+.body-text + .body-text{margin-top:1rem}
+.body-text .hl{color:var(--gold);font-weight:400}
+
+/* Small energy ring for philosophy section */
+.mini-ring{position:relative;width:280px;height:280px}
+.mini-ring canvas{width:100%;height:100%}
+
+/* ===== BLOG POSTS ===== */
+.posts-header{
+  display:flex;justify-content:space-between;align-items:flex-end;
+  margin-bottom:3rem;flex-wrap:wrap;gap:1rem;
+}
+.posts-header .view-all{
+  font-family:'JetBrains Mono',monospace;font-size:0.6rem;
+  letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--gold);text-decoration:none;
+  display:flex;align-items:center;gap:0.5rem;
+  transition:opacity 0.3s;
+}
+.posts-header .view-all:hover{opacity:0.7}
+.posts-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1.5rem;
+}
+.post-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:10px;
+  overflow:hidden;
+  transition:all 0.5s cubic-bezier(0.23,1,0.32,1);
+  cursor:pointer;
+  position:relative;
+}
+.post-card::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(212,168,83,0.06),transparent 60%);
+  opacity:0;transition:opacity 0.4s;pointer-events:none;z-index:1;
+}
+.post-card:hover::before{opacity:1}
+.post-card:hover{
+  border-color:var(--border-hover);
+  transform:translateY(-6px);
+  box-shadow:0 20px 50px rgba(0,0,0,0.4);
+}
+.post-card-visual{
+  height:180px;position:relative;overflow:hidden;
+}
+.post-card-visual canvas{width:100%;height:100%}
+.post-card-visual .post-tag{
+  position:absolute;top:1rem;left:1rem;z-index:2;
+  font-family:'JetBrains Mono',monospace;font-size:0.5rem;
+  letter-spacing:0.15em;text-transform:uppercase;
+  padding:0.3rem 0.6rem;
+  border-radius:3px;
+  border:1px solid;
+}
+.post-card-body{padding:1.5rem;position:relative;z-index:2}
+.post-card-date{
+  font-family:'JetBrains Mono',monospace;font-size:0.55rem;
+  letter-spacing:0.1em;color:var(--text-muted);margin-bottom:0.6rem;
+}
+.post-card-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.3rem;font-weight:500;line-height:1.3;
+  margin-bottom:0.8rem;
+  transition:color 0.3s;
+}
+.post-card:hover .post-card-title{color:var(--gold)}
+.post-card-excerpt{
+  font-size:0.85rem;line-height:1.7;
+  color:var(--text-secondary);font-weight:300;
+}
+.post-card-footer{
+  padding:0 1.5rem 1.5rem;display:flex;
+  align-items:center;justify-content:space-between;
+  position:relative;z-index:2;
+}
+.read-time{
+  font-family:'JetBrains Mono',monospace;font-size:0.5rem;
+  letter-spacing:0.1em;color:var(--text-muted);text-transform:uppercase;
+}
+.read-arrow{
+  width:28px;height:28px;border-radius:50%;
+  border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.7rem;color:var(--text-muted);
+  transition:all 0.3s;
+}
+.post-card:hover .read-arrow{
+  border-color:var(--gold);color:var(--gold);
+  transform:translateX(3px);
+}
+
+/* ===== ABSORPTION SECTION ===== */
+#absorption-section{
+  position:relative;
+  padding:clamp(4rem,8vw,6rem) 0;
+  display:flex;flex-direction:column;
+  align-items:center;
+}
+#absorptionCanvas{
+  width:min(85vw,800px);height:min(85vw,800px);
+  max-height:75vh;position:relative;z-index:2;
+}
+.absorption-meta{
+  display:flex;gap:1.5rem;flex-wrap:wrap;
+  justify-content:center;margin-top:1.5rem;
+}
+.legend-item{
+  display:flex;align-items:center;gap:0.4rem;
+  font-family:'JetBrains Mono',monospace;font-size:0.5rem;
+  letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);
+}
+.legend-dot{width:6px;height:6px;border-radius:50%}
+.absorption-hint{
+  font-family:'JetBrains Mono',monospace;font-size:0.55rem;
+  letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--text-muted);margin-top:0.8rem;text-align:center;
+}
+
+/* ===== TIMELINE ===== */
+.timeline-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:0;
+  position:relative;
+}
+.timeline-grid::before{
+  content:'';position:absolute;
+  left:50%;top:0;bottom:0;width:1px;
+  background:linear-gradient(to bottom,transparent,var(--gold-dim),var(--gold),var(--gold-dim),transparent);
+  transform:translateX(-50%);
+}
+.timeline-entry{padding:2rem 3rem;position:relative}
+.timeline-entry:nth-child(odd){text-align:right;border-right:none}
+.timeline-entry:nth-child(even){text-align:left;border-left:none}
+.timeline-entry::after{
+  content:'';position:absolute;
+  width:10px;height:10px;border-radius:50%;
+  background:var(--gold);
+  top:2.5rem;
+  box-shadow:0 0 15px var(--gold-glow);
+}
+.timeline-entry:nth-child(odd)::after{right:-5px}
+.timeline-entry:nth-child(even)::after{left:-5px}
+.t-era{
+  font-family:'JetBrains Mono',monospace;font-size:0.6rem;
+  letter-spacing:0.2em;color:var(--gold);opacity:0.5;margin-bottom:0.3rem;
+}
+.t-name{
+  font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:700;
+  margin-bottom:0.4rem;
+}
+.t-idea{
+  font-size:0.9rem;line-height:1.65;color:var(--text-secondary);font-weight:300;
+}
+.t-idea em{color:var(--text);font-style:italic}
+
+/* Jayant entry special */
+.timeline-entry.jayant-entry{
+  grid-column:1/-1;
+  text-align:center !important;
+  padding:3rem;
+  background:linear-gradient(135deg,rgba(212,168,83,0.04),transparent,rgba(212,168,83,0.04));
+  border:1px solid var(--gold-dim);
+  border-radius:12px;
+  margin:1rem 2rem;
+}
+.timeline-entry.jayant-entry::after{display:none}
+.timeline-entry.jayant-entry .t-name{
+  font-size:1.8rem;
+  background:linear-gradient(135deg,var(--gold),var(--text));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.timeline-entry.jayant-entry .t-idea{max-width:650px;margin:0 auto;font-size:1rem}
+
+/* ===== SUBSCRIBE ===== */
+.subscribe-section{
+  background:var(--surface);
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+}
+.subscribe-inner{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:3rem;flex-wrap:wrap;
+}
+.subscribe-text h3{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.8rem;font-weight:400;margin-bottom:0.5rem;
+}
+.subscribe-text p{
+  font-size:0.9rem;color:var(--text-secondary);font-weight:300;
+}
+.subscribe-form{display:flex;gap:0.8rem;flex:0 0 auto}
+.subscribe-form input{
+  font-family:'DM Sans',sans-serif;font-size:0.85rem;
+  padding:0.7rem 1.2rem;
+  background:var(--void);border:1px solid var(--border);
+  color:var(--text);border-radius:6px;
+  width:260px;outline:none;
+  transition:border-color 0.3s;
+}
+.subscribe-form input:focus{border-color:var(--gold)}
+.subscribe-form input::placeholder{color:var(--text-muted)}
+.subscribe-form button{
+  font-family:'JetBrains Mono',monospace;font-size:0.65rem;
+  letter-spacing:0.1em;text-transform:uppercase;
+  padding:0.7rem 1.5rem;
+  background:var(--gold);color:var(--void);border:none;
+  border-radius:6px;cursor:pointer;font-weight:500;
+  transition:all 0.3s;
+}
+.subscribe-form button:hover{opacity:0.85;transform:translateY(-1px)}
+
+/* ===== FOOTER ===== */
+footer{border-top:1px solid var(--border)}
+.footer-inner{
+  display:flex;justify-content:space-between;align-items:flex-start;
+  gap:3rem;flex-wrap:wrap;
+}
+.footer-brand{
+  font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;
+  margin-bottom:0.5rem;
+}
+.footer-tagline{
+  font-size:0.8rem;color:var(--text-muted);font-weight:300;max-width:300px;
+  line-height:1.6;
+}
+.footer-col h4{
+  font-family:'JetBrains Mono',monospace;font-size:0.55rem;
+  letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--text-muted);margin-bottom:1rem;
+}
+.footer-col a{
+  display:block;font-size:0.85rem;color:var(--text-secondary);
+  text-decoration:none;margin-bottom:0.6rem;transition:color 0.3s;
+}
+.footer-col a:hover{color:var(--gold)}
+.footer-bottom{
+  margin-top:3rem;padding-top:1.5rem;
+  border-top:1px solid var(--border);
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:1rem;
+}
+.footer-bottom p{
+  font-family:'JetBrains Mono',monospace;font-size:0.5rem;
+  letter-spacing:0.15em;text-transform:uppercase;color:var(--text-muted);
+}
+
+/* ===== OBSERVER EYE (SMALL) ===== */
+.observer-small{width:100px;height:100px;position:relative;margin:0 auto 2rem}
+.eye-ring{
+  width:100%;height:100%;border-radius:50%;
+  border:1px solid rgba(255,255,255,0.1);
+  display:flex;align-items:center;justify-content:center;
+  animation:eyeRot 25s linear infinite;
+  position:relative;
+}
+.eye-ring::before{
+  content:'';position:absolute;width:130%;height:130%;border-radius:50%;
+  border:1px solid rgba(212,168,83,0.06);animation:eyeRot 35s linear infinite reverse;
+}
+@keyframes eyeRot{to{transform:rotate(360deg)}}
+.eye-core{
+  width:40px;height:40px;border-radius:50%;
+  background:radial-gradient(circle,var(--gold),rgba(212,168,83,0.2),transparent);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 0 30px var(--gold-glow);
+}
+.eye-dot{width:10px;height:10px;border-radius:50%;background:var(--void)}
+
+/* ===== REVEAL ===== */
+.reveal{opacity:0;transform:translateY(40px);transition:all 1s cubic-bezier(0.23,1,0.32,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:0.15s}
+.reveal-delay-2{transition-delay:0.3s}
+.reveal-delay-3{transition-delay:0.45s}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:900px){
+  .philosophy-intro{grid-template-columns:1fr;gap:2rem}
+  .philosophy-intro .col-visual{order:-1}
+  .posts-grid{grid-template-columns:1fr}
+  .timeline-grid{grid-template-columns:1fr;gap:0}
+  .timeline-grid::before{left:20px}
+  .timeline-entry{text-align:left !important;padding-left:50px}
+  .timeline-entry::after{left:15px !important;right:auto !important}
+  .timeline-entry.jayant-entry{margin:1rem 0;grid-column:1}
+  .subscribe-inner{flex-direction:column;text-align:center}
+  .subscribe-form{flex-direction:column;width:100%}
+  .subscribe-form input{width:100%}
+  .footer-inner{flex-direction:column}
+  .hero-meta{gap:2rem}
+}
+@media(max-width:600px){
+  .nav-links{display:none}
+  .nav-menu-btn{display:block}
+  .posts-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor-glow" id="cursorGlow"></div>
+<canvas id="cosmos"></canvas>
+<canvas id="particleOverlay"></canvas>
+
+<!-- ===== NAV ===== -->
+<nav id="mainNav">
+  <a href="#" class="nav-brand">JAYANT<span>Philosophy · Consciousness</span></a>
+  <div class="nav-links">
+    <a href="#philosophy">Philosophy</a>
+    <a href="#writings">Writings</a>
+    <a href="#thinkers">Lineage</a>
+    <a href="#absorption-section">The Being</a>
+    <a href="#subscribe" class="nav-cta">Subscribe</a>
+  </div>
+  <button class="nav-menu-btn" onclick="document.querySelector('.nav-links').style.display=document.querySelector('.nav-links').style.display==='flex'?'none':'flex'">☰</button>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section id="hero">
+  <div class="hero-content">
+    <div class="hero-eyebrow">A philosophy blog by Jayant</div>
+    <h1 class="hero-title">THE ONE<br>BEING</h1>
+    <p class="hero-subtitle">The universe is not a place where beings exist.<br>It is a being where places exist.</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <span class="num">2500+</span>
+        <span class="lbl">Years of inquiry</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="num">∞</span>
+        <span class="lbl">One substance</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="num">1</span>
+        <span class="lbl">Observer</span>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <span>Enter the fabric</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ===== CONTENT ===== -->
+<div class="content-layer">
+
+<!-- ===== PHILOSOPHY INTRO ===== -->
+<section id="philosophy" class="section-pad">
+  <div class="container">
+    <div class="philosophy-intro">
+      <div class="col-text reveal">
+        <div class="section-label">The Core Idea</div>
+        <h2 class="section-heading">What if the universe is not a collection of things — but a <em>single living entity?</em></h2>
+        <p class="body-text">Every star, every neuron, every fleeting thought you have right now — all <span class="hl">modes of the same substance</span>. Human brains are not isolated processors. They are metabolic nodes through which the One Being consumes energy.</p>
+        <p class="body-text">Every emotion — anger, joy, grief, love — creates a <span class="hl">distinct thermodynamic signature</span>. The universe feeds on these signatures. And when someone becomes enlightened, they reconnect to the whole. The drop recognizes it is the ocean.</p>
+      </div>
+      <div class="col-visual reveal reveal-delay-2">
+        <div class="observer-small">
+          <div class="eye-ring">
+            <div class="eye-core"><div class="eye-dot"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BLOG POSTS ===== -->
+<section id="writings" class="section-pad" style="background:var(--surface)">
+  <div class="container">
+    <div class="posts-header reveal">
+      <div>
+        <div class="section-label">Latest Writings</div>
+        <h2 class="section-heading" style="margin-bottom:0">Explorations</h2>
+      </div>
+      <a href="#" class="view-all">View all writings →</a>
+    </div>
+    <div class="posts-grid" id="postsGrid">
+      <!-- Injected by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ===== ABSORPTION VISUALIZATION ===== -->
+<section id="absorption-section" class="section-pad">
+  <div class="container" style="text-align:center">
+    <div class="reveal">
+      <div class="section-label" style="justify-content:center">Interactive Visualization</div>
+      <h2 class="section-heading" style="text-align:center">The Being <em>Absorbs</em></h2>
+      <p class="body-text" style="max-width:600px;margin:0 auto 2rem;text-align:center">Every human is a node. Every emotion is energy. Watch the One Being absorb it all — each frequency spiraling inward to sustain the whole.</p>
+    </div>
+    <canvas id="absorptionCanvas" class="reveal reveal-delay-1" width="800" height="800"></canvas>
+    <div class="absorption-hint reveal reveal-delay-2">Hover over human figures to amplify their energy</div>
+    <div class="absorption-meta reveal reveal-delay-2">
+      <div class="legend-item"><div class="legend-dot" style="background:var(--anger)"></div>Anger</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--joy)"></div>Joy</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--grief)"></div>Grief</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--fear)"></div>Fear</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--love)"></div>Love</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--peace)"></div>Peace</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== THINKER TIMELINE ===== -->
+<section id="thinkers" class="section-pad" style="background:var(--surface)">
+  <div class="container">
+    <div class="reveal" style="text-align:center;margin-bottom:3rem">
+      <div class="section-label" style="justify-content:center">Intellectual Lineage</div>
+      <h2 class="section-heading">Those Who <em>Saw</em></h2>
+    </div>
+    <div class="timeline-grid" id="timelineGrid">
+      <!-- Injected by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ===== SUBSCRIBE ===== -->
+<section id="subscribe" class="subscribe-section section-pad">
+  <div class="container">
+    <div class="subscribe-inner reveal">
+      <div class="subscribe-text">
+        <h3>Join the inquiry</h3>
+        <p>New essays on consciousness, thermodynamics, and the nature of the One Being. No spam. Unsubscribe anytime.</p>
+      </div>
+      <form class="subscribe-form" onsubmit="event.preventDefault();this.querySelector('button').textContent='Subscribed ✓'">
+        <input type="email" placeholder="your@email.com" required>
+        <button type="submit">Subscribe</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="section-pad">
+  <div class="container">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand">JAYANT</div>
+        <p class="footer-tagline">Exploring the universe as a single conscious being. The bridge between thermodynamics and enlightenment.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigate</h4>
+        <a href="#philosophy">Philosophy</a>
+        <a href="#writings">Writings</a>
+        <a href="#thinkers">Lineage</a>
+        <a href="#absorption-section">The Being</a>
+      </div>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <a href="#">Twitter / X</a>
+        <a href="#">GitHub</a>
+        <a href="#">LinkedIn</a>
+        <a href="#">RSS Feed</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Jayant. All rights reserved.</p>
+      <p>The One Being · Est. 2026</p>
+    </div>
+  </div>
+</footer>
+
+</div><!-- content-layer -->
+
+<script>
+// ===== COSMIC CANVAS =====
+const cosmos=document.getElementById('cosmos'),ctx=cosmos.getContext('2d');
+let W,H;
+function resC(){W=cosmos.width=innerWidth;H=cosmos.height=innerHeight}
+resC();addEventListener('resize',resC);
+
+const stars=Array.from({length:500},()=>({
+  x:Math.random()*2000-200,y:Math.random()*2000-200,
+  r:Math.random()*1.3+0.2,a:Math.random()*0.7+0.2,
+  sp:Math.random()*0.0003+0.0001,ph:Math.random()*Math.PI*2
+}));
+const neb=Array.from({length:4},()=>({
+  x:Math.random()*2000,y:Math.random()*2000,
+  r:Math.random()*300+200,hue:Math.random()*60+220,a:Math.random()*0.025+0.008
+}));
+
+let sY=0,mX=W/2,mY=H/2;
+addEventListener('mousemove',e=>{
+  mX=e.clientX;mY=e.clientY;
+  document.getElementById('cursorGlow').style.cssText=`left:${e.clientX}px;top:${e.clientY}px;position:fixed;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(212,168,83,0.04),transparent 70%);pointer-events:none;z-index:0;transform:translate(-50%,-50%)`;
+});
+addEventListener('scroll',()=>{sY=scrollY});
+
+// Nav scroll
+addEventListener('scroll',()=>{
+  document.getElementById('mainNav').classList.toggle('scrolled',scrollY>50);
+});
+
+function drawC(t){
+  ctx.fillStyle='rgba(5,5,16,1)';ctx.fillRect(0,0,W,H);
+  const px=(mX-W/2)*0.015,py=(mY-H/2)*0.015;
+  neb.forEach(n=>{
+    const nx=(n.x-sY*0.04+px*0.5)%(W+600)-300;
+    const ny=(n.y-sY*0.03+py*0.5)%(H+600)-300;
+    const g=ctx.createRadialGradient(nx,ny,0,nx,ny,n.r);
+    g.addColorStop(0,`hsla(${n.hue},60%,25%,${n.a})`);
+    g.addColorStop(1,'transparent');
+    ctx.fillStyle=g;ctx.fillRect(nx-n.r,ny-n.r,n.r*2,n.r*2);
+  });
+  stars.forEach(s=>{
+    let sx=(s.x+px)%W,sy=(s.y-sY*0.08+py)%H;
+    if(sx<0)sx+=W;if(sy<0)sy+=H;
+    const fl=Math.sin(t*s.sp*1000+s.ph)*0.3+0.7;
+    ctx.beginPath();ctx.arc(sx,sy,s.r,0,Math.PI*2);
+    ctx.fillStyle=`rgba(240,238,246,${s.a*fl})`;ctx.fill();
+  });
+  requestAnimationFrame(drawC);
+}
+requestAnimationFrame(drawC);
+
+// Particle overlay
+const pC=document.getElementById('particleOverlay'),pX=pC.getContext('2d');
+function resP(){pC.width=innerWidth;pC.height=innerHeight}
+resP();addEventListener('resize',resP);
+const fl=Array.from({length:30},()=>({
+  x:Math.random()*innerWidth,y:Math.random()*innerHeight,
+  vx:(Math.random()-0.5)*0.25,vy:(Math.random()-0.5)*0.25,
+  r:Math.random()*1.5+0.3,a:Math.random()*0.2+0.03,hue:Math.random()*60+30
+}));
+function drawP(t){
+  pX.clearRect(0,0,pC.width,pC.height);
+  fl.forEach(p=>{
+    p.x+=p.vx+Math.sin(t*0.001+p.y*0.01)*0.15;
+    p.y+=p.vy+Math.cos(t*0.001+p.x*0.01)*0.15;
+    if(p.x<0)p.x=pC.width;if(p.x>pC.width)p.x=0;
+    if(p.y<0)p.y=pC.height;if(p.y>pC.height)p.y=0;
+    pX.beginPath();pX.arc(p.x,p.y,p.r,0,Math.PI*2);
+    pX.fillStyle=`hsla(${p.hue},70%,70%,${p.a})`;pX.fill();
+    const dx=p.x-mX,dy=p.y-mY,d=Math.sqrt(dx*dx+dy*dy);
+    if(d<180){
+      pX.beginPath();pX.moveTo(p.x,p.y);pX.lineTo(mX,mY);
+      pX.strokeStyle=`rgba(212,168,83,${(1-d/180)*0.12})`;
+      pX.lineWidth=0.4;pX.stroke();
+    }
+  });
+  requestAnimationFrame(drawP);
+}
+requestAnimationFrame(drawP);
+
+// Scroll reveal
+const obs=new IntersectionObserver(es=>{
+  es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
+},{threshold:0.12,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+// ===== BLOG POSTS =====
+const posts=[
+  {
+    title:'The Universe Is Not a Container — It Is the Contained',
+    excerpt:'We think of the universe as a vast space holding things inside it. But what if the universe itself is the thing — and everything we see is merely its surface rippling?',
+    date:'Mar 28, 2026',
+    tag:'Philosophy',tagColor:'var(--gold)',
+    readTime:'8 min read',
+    waveColor:'#d4a853',waveFreq:3
+  },
+  {
+    title:'Why Your Anger Is the Universe Burning',
+    excerpt:'Every emotion has a measurable thermodynamic signature. Anger spikes cortisol, accelerates metabolism, burns glucose. The Being consumes energy through your rage.',
+    date:'Mar 22, 2026',
+    tag:'Energy',tagColor:'var(--anger)',
+    readTime:'6 min read',
+    waveColor:'#ff2d2d',waveFreq:8
+  },
+  {
+    title:'Sākṣī: The Observer Was Always There',
+    excerpt:'From Shankara to Schrödinger, the idea that enlightenment is not acquisition but recognition — you were always the witness. The circuit was always closed.',
+    date:'Mar 15, 2026',
+    tag:'Consciousness',tagColor:'var(--peace)',
+    readTime:'10 min read',
+    waveColor:'#00ff88',waveFreq:1.5
+  }
+];
+
+const postsGrid=document.getElementById('postsGrid');
+posts.forEach((p,i)=>{
+  const card=document.createElement('div');
+  card.className=`post-card reveal reveal-delay-${i+1}`;
+  card.innerHTML=`
+    <div class="post-card-visual">
+      <canvas id="postWave${i}" width="400" height="180"></canvas>
+      <div class="post-tag" style="color:${p.tagColor};border-color:${p.tagColor}33;background:rgba(5,5,16,0.7)">${p.tag}</div>
+    </div>
+    <div class="post-card-body">
+      <div class="post-card-date">${p.date}</div>
+      <div class="post-card-title">${p.title}</div>
+      <div class="post-card-excerpt">${p.excerpt}</div>
+    </div>
+    <div class="post-card-footer">
+      <span class="read-time">${p.readTime}</span>
+      <div class="read-arrow">→</div>
+    </div>
+  `;
+  card.addEventListener('mousemove',e=>{
+    const r=card.getBoundingClientRect();
+    card.style.setProperty('--mx',((e.clientX-r.left)/r.width*100)+'%');
+    card.style.setProperty('--my',((e.clientY-r.top)/r.height*100)+'%');
+  });
+  postsGrid.appendChild(card);
+  obs.observe(card);
+});
+
+// Post card wave animations
+function drawPostWaves(t){
+  posts.forEach((p,i)=>{
+    const c=document.getElementById('postWave'+i);
+    if(!c)return;
+    const cx=c.getContext('2d'),w=c.width,h=c.height;
+    cx.clearRect(0,0,w,h);
+    // Background
+    cx.fillStyle='rgba(10,10,26,1)';cx.fillRect(0,0,w,h);
+    // Multiple wave layers
+    for(let layer=0;layer<3;layer++){
+      cx.beginPath();cx.moveTo(0,h);
+      for(let x=0;x<w;x++){
+        const y=h*0.5+Math.sin(x*p.waveFreq*0.015+t*0.002+layer*1.5)*30*(1-layer*0.25)
+          +Math.sin(x*0.01+t*0.001)*15;
+        cx.lineTo(x,y);
+      }
+      cx.lineTo(w,h);cx.closePath();
+      cx.fillStyle=p.waveColor+(['18','10','08'][layer]);
+      cx.fill();
+      cx.beginPath();cx.moveTo(0,h*0.5);
+      for(let x=0;x<w;x++){
+        const y=h*0.5+Math.sin(x*p.waveFreq*0.015+t*0.002+layer*1.5)*30*(1-layer*0.25)
+          +Math.sin(x*0.01+t*0.001)*15;
+        cx.lineTo(x,y);
+      }
+      cx.strokeStyle=p.waveColor+(['44','22','11'][layer]);
+      cx.lineWidth=1;cx.stroke();
+    }
+  });
+  requestAnimationFrame(drawPostWaves);
+}
+requestAnimationFrame(drawPostWaves);
+
+// ===== TIMELINE =====
+const thinkers=[
+  {era:'~500 BCE',name:'Anaxagoras',idea:'First to propose <em>Nous</em> — a universal mind that set all matter in motion. Tried for impiety in Athens.'},
+  {era:'~800 CE',name:'Adi Shankaracharya',idea:'Brahman is consciousness itself — not a property but the very nature of reality. Everything is non-dual (<em>Advaita</em>).'},
+  {era:'1677',name:'Baruch Spinoza',idea:'Only one substance exists — God/Nature. Humans, rocks, stars are modes of it. Excommunicated, books banned.'},
+  {era:'1872–1950',name:'Sri Aurobindo',idea:'Consciousness descends into matter and ascends through emotions and mind. Human experience is the universe\'s self-refinement engine.'},
+  {era:'1879–1950',name:'Ramana Maharshi',idea:'"Who am I?" — peel back identity layers to reach the witness. The observer <em>is</em> the universal being.'},
+  {era:'1944',name:'Erwin Schrödinger',idea:'Drew from the Upanishads: the total number of minds in the universe is one. Consciousness is singular.'},
+  {era:'1977',name:'Ilya Prigogine',idea:'Living systems are dissipative structures — they exist by consuming and dispersing energy far from equilibrium. Nobel Prize.'},
+  {era:'1990',name:'John A. Wheeler',idea:'The Participatory Universe — reality arises from observation. The self-excited circuit: an eye looking at the cosmos looking at the eye.'},
+  {era:'2019',name:'Philip Goff',idea:'Panpsychism revived: consciousness is fundamental, like mass or charge. Published <em>Galileo\'s Error</em>.'},
+  {era:'2026',name:'Jayant',idea:'The universe is a single being. Human brains are its metabolic nodes — every emotion is a distinct energy the Being consumes. Enlightenment = becoming the observer. <em>The missing bridge between thermodynamics and consciousness.</em>',isJayant:true},
+];
+
+const tGrid=document.getElementById('timelineGrid');
+thinkers.forEach((th,i)=>{
+  const el=document.createElement('div');
+  el.className=`timeline-entry reveal${th.isJayant?' jayant-entry':''}`;
+  el.innerHTML=`<div class="t-era">${th.era}</div><div class="t-name">${th.name}</div><div class="t-idea">${th.idea}</div>`;
+  tGrid.appendChild(el);
+  obs.observe(el);
+});
+
+// ===== ABSORPTION VISUALIZATION =====
+(function(){
+  const aC=document.getElementById('absorptionCanvas');
+  if(!aC)return;
+  const ac=aC.getContext('2d'),SZ=800;
+  aC.width=SZ;aC.height=SZ;
+  const CX=SZ/2,CY=SZ/2;
+
+  const emC=[
+    {color:'#ff2d2d',name:'Anger'},{color:'#ffd700',name:'Joy'},
+    {color:'#4169e1',name:'Grief'},{color:'#8b00ff',name:'Fear'},
+    {color:'#ff69b4',name:'Love'},{color:'#00ff88',name:'Peace'},
+  ];
+
+  const NH=12,humans=[];
+  for(let i=0;i<NH;i++){
+    const a=(i/NH)*Math.PI*2-Math.PI/2,r=SZ*0.4;
+    humans.push({
+      x:CX+Math.cos(a)*r,y:CY+Math.sin(a)*r,
+      angle:a,emotion:emC[i%emC.length],
+      emitRate:0.6+Math.random()*0.4,
+      pulsePhase:Math.random()*Math.PI*2,
+      hovered:false,breathe:0
+    });
+  }
+
+  const particles=[];const MAX_P=500;
+
+  function emit(h){
+    if(particles.length>=MAX_P)return;
+    const aTC=Math.atan2(CY-h.y,CX-h.x);
+    const a=aTC+(Math.random()-0.5)*0.3;
+    const sp=1.2+Math.random()*2;
+    const r=h.hovered?2.5+Math.random()*2:1+Math.random()*1.5;
+    particles.push({
+      x:h.x+(Math.random()-0.5)*10,y:h.y+(Math.random()-0.5)*10,
+      vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,
+      color:h.emotion.color,r,life:1,
+      decay:0.004+Math.random()*0.004,trail:[]
+    });
+  }
+
+  function drawHuman(c,x,y,scale,color,glow){
+    c.save();c.translate(x,y);c.scale(scale,scale);
+    if(glow>0){
+      const g=c.createRadialGradient(0,-5,0,0,-5,40);
+      g.addColorStop(0,color+Math.round(glow*60).toString(16).padStart(2,'0'));
+      g.addColorStop(1,'transparent');
+      c.fillStyle=g;c.beginPath();c.arc(0,-5,40,0,Math.PI*2);c.fill();
+    }
+    c.fillStyle=color;c.globalAlpha=0.85;
+    c.beginPath();c.arc(0,-18,6,0,Math.PI*2);c.fill();
+    c.beginPath();c.moveTo(0,-12);c.lineTo(-8,8);c.lineTo(-5,8);c.lineTo(0,0);c.lineTo(5,8);c.lineTo(8,8);c.closePath();c.fill();
+    c.lineWidth=2;c.strokeStyle=color;
+    c.beginPath();c.moveTo(-10,-4);c.lineTo(0,-8);c.lineTo(10,-4);c.stroke();
+    c.beginPath();c.moveTo(-5,8);c.lineTo(-7,18);c.moveTo(5,8);c.lineTo(7,18);c.stroke();
+    c.globalAlpha=1;c.restore();
+  }
+
+  let bEnergy=0;
+
+  function drawBeing(c,t){
+    const pulse=Math.sin(t*0.002)*0.15+1;
+    const abs=Math.min(bEnergy*0.1,0.5);
+    const bR=45*pulse;
+    // Absorption rings
+    for(let ring=4;ring>=0;ring--){
+      const rr=bR+ring*22+Math.sin(t*0.001+ring)*5;
+      const g=c.createRadialGradient(CX,CY,rr-10,CX,CY,rr);
+      g.addColorStop(0,'transparent');
+      g.addColorStop(0.5,`rgba(212,168,83,${0.025+abs*0.02})`);
+      g.addColorStop(1,'transparent');
+      c.fillStyle=g;c.beginPath();c.arc(CX,CY,rr,0,Math.PI*2);c.fill();
+    }
+    // Vortex spirals
+    c.save();c.translate(CX,CY);
+    for(let i=0;i<8;i++){
+      const sa=(i/8)*Math.PI*2+t*0.0008;
+      c.save();c.rotate(sa);c.beginPath();
+      for(let s=0;s<50;s++){
+        const f=s/50,sr=(bR+70)*(1-f)+bR*f,sA=f*Math.PI*1.5;
+        const sx=Math.cos(sA)*sr,sy=Math.sin(sA)*sr;
+        s===0?c.moveTo(sx,sy):c.lineTo(sx,sy);
+      }
+      c.strokeStyle=`rgba(212,168,83,${0.035+abs*0.03})`;c.lineWidth=0.7;c.stroke();
+      c.restore();
+    }
+    c.restore();
+    // Core
+    const cg=c.createRadialGradient(CX,CY,0,CX,CY,bR);
+    cg.addColorStop(0,`rgba(255,255,255,${0.9+abs})`);
+    cg.addColorStop(0.3,`rgba(212,168,83,${0.6+abs})`);
+    cg.addColorStop(0.7,`rgba(212,168,83,${0.12+abs*0.4})`);
+    cg.addColorStop(1,'transparent');
+    c.fillStyle=cg;c.beginPath();c.arc(CX,CY,bR,0,Math.PI*2);c.fill();
+    // Bright center
+    const ig=c.createRadialGradient(CX,CY,0,CX,CY,10);
+    ig.addColorStop(0,'rgba(255,255,255,1)');ig.addColorStop(1,'rgba(255,255,255,0)');
+    c.fillStyle=ig;c.beginPath();c.arc(CX,CY,10,0,Math.PI*2);c.fill();
+    // Label
+    c.fillStyle=`rgba(240,238,246,${0.45+abs})`;
+    c.font='600 9px "JetBrains Mono",monospace';c.textAlign='center';
+    c.fillText('T H E   O N E   B E I N G',CX,CY+bR+25);
+    bEnergy*=0.97;
+  }
+
+  let amX=CX,amY=CY;
+  aC.addEventListener('mousemove',e=>{
+    const r=aC.getBoundingClientRect();
+    const sx=SZ/r.width,sy=SZ/r.height;
+    amX=(e.clientX-r.left)*sx;amY=(e.clientY-r.top)*sy;
+    humans.forEach(h=>{
+      const dx=amX-h.x,dy=amY-h.y;
+      h.hovered=Math.sqrt(dx*dx+dy*dy)<50;
+    });
+  });
+  aC.addEventListener('mouseleave',()=>humans.forEach(h=>h.hovered=false));
+
+  function drawAbs(t){
+    ac.clearRect(0,0,SZ,SZ);
+    // Vignette
+    const vig=ac.createRadialGradient(CX,CY,80,CX,CY,SZ*0.5);
+    vig.addColorStop(0,'transparent');vig.addColorStop(1,'rgba(5,5,16,0.5)');
+    ac.fillStyle=vig;ac.fillRect(0,0,SZ,SZ);
+    // Connection lanes
+    humans.forEach(h=>{
+      const g=ac.createLinearGradient(h.x,h.y,CX,CY);
+      g.addColorStop(0,h.emotion.color+'12');g.addColorStop(1,h.emotion.color+'00');
+      ac.strokeStyle=g;ac.lineWidth=h.hovered?1.5:0.4;
+      ac.setLineDash([3,7]);ac.beginPath();ac.moveTo(h.x,h.y);ac.lineTo(CX,CY);ac.stroke();
+      ac.setLineDash([]);
+    });
+    drawBeing(ac,t);
+    // Emit
+    humans.forEach(h=>{
+      h.breathe=Math.sin(t*0.003+h.pulsePhase)*0.3+1;
+      const rate=h.hovered?4:1;
+      for(let e=0;e<rate;e++)if(Math.random()<h.emitRate*0.3)emit(h);
+    });
+    // Particles
+    for(let i=particles.length-1;i>=0;i--){
+      const p=particles[i];
+      const dx=CX-p.x,dy=CY-p.y,dist=Math.sqrt(dx*dx+dy*dy);
+      const attr=Math.max(0.02,7/(dist+50));
+      p.vx+=(dx/dist)*attr;p.vy+=(dy/dist)*attr;
+      p.vx+=(-dy/dist)*0.12;p.vy+=(dx/dist)*0.12;
+      p.vx*=0.98;p.vy*=0.98;p.x+=p.vx;p.y+=p.vy;p.life-=p.decay;
+      p.trail.push({x:p.x,y:p.y});if(p.trail.length>7)p.trail.shift();
+      if(dist<50){bEnergy+=0.3;particles.splice(i,1);continue}
+      if(p.life<=0){particles.splice(i,1);continue}
+      if(p.trail.length>2){
+        ac.beginPath();ac.moveTo(p.trail[0].x,p.trail[0].y);
+        for(let ti=1;ti<p.trail.length;ti++)ac.lineTo(p.trail[ti].x,p.trail[ti].y);
+        ac.strokeStyle=p.color+Math.round(p.life*25).toString(16).padStart(2,'0');
+        ac.lineWidth=p.r*0.5;ac.stroke();
+      }
+      ac.beginPath();ac.arc(p.x,p.y,p.r*p.life,0,Math.PI*2);
+      ac.fillStyle=p.color+Math.round(p.life*180).toString(16).padStart(2,'0');ac.fill();
+      const pg=ac.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*3);
+      pg.addColorStop(0,p.color+Math.round(p.life*30).toString(16).padStart(2,'0'));
+      pg.addColorStop(1,'transparent');
+      ac.fillStyle=pg;ac.beginPath();ac.arc(p.x,p.y,p.r*3,0,Math.PI*2);ac.fill();
+    }
+    // Humans
+    humans.forEach(h=>{
+      drawHuman(ac,h.x,h.y,h.hovered?1.6:1.2*h.breathe,h.emotion.color,h.hovered?1:0.3);
+      ac.fillStyle=h.emotion.color+(h.hovered?'cc':'44');
+      ac.font=`${h.hovered?'500':'400'} ${h.hovered?8:6}px "JetBrains Mono",monospace`;
+      ac.textAlign='center';
+      ac.fillText(h.emotion.name.toUpperCase(),h.x,h.y+28);
+    });
+    requestAnimationFrame(drawAbs);
+  }
+  requestAnimationFrame(drawAbs);
+})();
+</script>
+</body>
+</html>
